@@ -1,4 +1,4 @@
 package com.petcareconnect.api.auth;
 
-public class RecuperarSenhaResponse {
+public record RecuperarSenhaResponse(String token) {
 }

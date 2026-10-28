@@ -23,4 +23,20 @@ public class AuthController {
     public ApiResponse<LoginResponse> login(@Valid @RequestBody LoginRequest req) {
         return ApiResponse.ok(authService.login(req));
     }
+
+    @PostMapping("/cadastro")
+    public ApiResponse<Long> cadastro(@Valid @RequestBody CadastroRequest req) {
+        return ApiResponse.ok(authService.cadastrar(req));
+    }
+
+    @PostMapping("/recuperar-senha")
+    public ApiResponse<RecuperarSenhaResponse> recuperarSenha(@Valid @RequestBody RecuperarSenhaRequest req) {
+        return ApiResponse.ok(authService.recuperarSenha(req));
+    }
+
+    @PostMapping("/nova-senha")
+    public ApiResponse<Void> novaSenha(@Valid @RequestBody NovaSenhaRequest req) {
+        authService.novaSenha(req);
+        return ApiResponse.okComMensagem("Senha alterada com sucesso.", null);
+    }
 }
