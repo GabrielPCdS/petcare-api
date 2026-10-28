@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX uk_pets_tutor_nome ON pets (tutor_id, lower(nome));
