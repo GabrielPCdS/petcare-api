@@ -1,0 +1,4 @@
+package com.petcareconnect.api.usuario;
+
+public class UsuarioCriarRequest {
+}
