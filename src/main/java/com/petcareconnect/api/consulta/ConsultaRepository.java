@@ -4,12 +4,19 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ConsultaRepository extends JpaRepository<Consulta, Long> {
 
+    @Override
+    @EntityGraph(attributePaths = {"pet", "veterinario"})
+    List<Consulta> findAll();
+
+    @EntityGraph(attributePaths = {"pet", "veterinario"})
     List<Consulta> findByPetTutorId(Long tutorId);
 
+    @EntityGraph(attributePaths = {"pet", "veterinario"})
     List<Consulta> findByVeterinarioId(Long veterinarioId);
 
     // RN-002: horario ja ocupado (qualquer status diferente do informado)
