@@ -45,7 +45,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/ping", "/api/erro", "/api/falha", "/api/validar").permitAll()
                         .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         // Teste temporario (remover junto com o PingController)
-                        .requestMatchers("/api/teste/admin").hasRole("Admin")
+                        .requestMatchers("/api/Usuarios", "/api/Usuarios/**").hasRole("Admin")
                         // Todo o resto da API exige token
                         .requestMatchers("/api/**").authenticated()
                         // Front React (etapa 10) e /error
