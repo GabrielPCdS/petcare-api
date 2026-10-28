@@ -41,6 +41,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         // Publicas
+                        .requestMatchers(HttpMethod.POST, "/api/Pets").hasAnyRole("Tutor", "Admin")
+                        .requestMatchers(HttpMethod.PATCH, "/api/Pets/**").hasAnyRole("Tutor", "Admin")
+                        .requestMatchers(HttpMethod.DELETE, "/api/Pets/**").hasAnyRole("Tutor", "Admin")
                         .requestMatchers("/api/Auth/**").permitAll()
                         .requestMatchers("/api/ping", "/api/erro", "/api/falha", "/api/validar").permitAll()
                         .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
