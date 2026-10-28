@@ -57,6 +57,11 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PATCH, "/api/Consultas/*/status").hasAnyRole(
                                 "Veterinario", "Admin")
 
+                        .requestMatchers(HttpMethod.POST, "/api/Vacinas").hasAnyRole("Veterinario", "Admin")
+                        .requestMatchers(HttpMethod.PATCH, "/api/Vacinas/*/aplicar").hasAnyRole("Veterinario", "Admin")
+                        .requestMatchers(HttpMethod.POST, "/api/Historico").hasAnyRole("Veterinario", "Admin")
+                        .requestMatchers(HttpMethod.POST, "/api/Relatorios").hasAnyRole("Veterinario", "Admin")
+
                         .requestMatchers("/api/Auth/**").permitAll()
                         .requestMatchers("/api/ping", "/api/erro", "/api/falha", "/api/validar").permitAll()
                         .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
