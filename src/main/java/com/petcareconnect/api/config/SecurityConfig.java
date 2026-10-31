@@ -62,8 +62,13 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/Historico").hasAnyRole("Veterinario", "Admin")
                         .requestMatchers(HttpMethod.POST, "/api/Relatorios").hasAnyRole("Veterinario", "Admin")
 
+
+                        .requestMatchers(HttpMethod.POST, "/api/Avisos").hasAnyRole("Veterinario", "Admin")
+                        .requestMatchers(HttpMethod.PUT, "/api/Avisos/*").hasRole("Admin")
+                        .requestMatchers(HttpMethod.DELETE, "/api/Avisos/*").hasRole("Admin")
+                        
                         .requestMatchers("/api/Auth/**").permitAll()
-                        .requestMatchers("/api/ping", "/api/erro", "/api/falha", "/api/validar").permitAll()
+                        .requestMatchers("/api/ping").permitAll()
                         .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         // Teste temporario (remover junto com o PingController)
                         .requestMatchers("/api/teste/admin").hasRole("Admin")
