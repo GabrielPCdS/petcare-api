@@ -1,6 +1,5 @@
 package com.petcareconnect.api;
 
-import static IntegracaoBase.SENHA;
 import static org.springframework.security.config.http.MatcherType.mvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
