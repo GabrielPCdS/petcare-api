@@ -9,6 +9,8 @@ import com.petcareconnect.api.common.NegocioException;
 import com.petcareconnect.api.security.JwtService;
 import com.petcareconnect.api.usuario.Usuario;
 import com.petcareconnect.api.usuario.UsuarioRepository;
+import com.petcareconnect.api.aviso.Aviso;
+import com.petcareconnect.api.aviso.AvisoService;
 
 @Service
 public class AuthService {
@@ -22,13 +24,16 @@ public class AuthService {
     private final JwtService jwtService;
     private final ResetTokenService resetTokens;
     private final String hashFalso;
+    private final AvisoService avisos;
 
     public AuthService(UsuarioRepository usuarios, PasswordEncoder encoder, JwtService jwtService,
+                       AvisoService avisos,
                        ResetTokenService resetTokens) {
         this.usuarios = usuarios;
         this.encoder = encoder;
         this.jwtService = jwtService;
         this.resetTokens = resetTokens;
+        this.avisos = avisos;
         // Usado quando o login nao existe, para o tempo de resposta nao revelar isso
         this.hashFalso = encoder.encode("senha-falsa");
     }
@@ -65,7 +70,11 @@ public class AuthService {
         u.setSenhaHash(encoder.encode(req.senha()));
         u.setPerfil(Usuario.TUTOR);
         u.setAtivo(true);
-        return usuarios.save(u).getId();
+        Long id = usuarios.save(u).getId();
+        avisos.criarAutomatico("Bem-vindo ao PetCare Connect",
+                "Olá, " + u.getNome() + "! Cadastre seus pets e agende consultas por aqui.",
+                Aviso.TUTOR, id, null, null, id);
+        return id;
     }
 
     // NAO altera a senha: apenas gera um token de uso unico
