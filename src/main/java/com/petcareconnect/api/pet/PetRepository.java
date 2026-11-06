@@ -26,4 +26,9 @@ public interface PetRepository extends JpaRepository<Pet, Long> {
 
     @Query("select count(c) > 0 from Consulta c where c.pet.id = :petId and c.veterinario.id = :vetId")
     boolean veterinarioAtende(@Param("petId") Long petId, @Param("vetId") Long vetId);
+
+    @Query("select count(p) > 0 from Pet p where p.tutor.id = :tutorId "
+            + "and p.id in (select c.pet.id from Consulta c where c.veterinario.id = :vetId)")
+    boolean veterinarioAtendeTutor(@Param("tutorId") Long tutorId, @Param("vetId") Long vetId);
+
 }
