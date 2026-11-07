@@ -33,6 +33,7 @@ import com.petcareconnect.api.pet.Pet;
 import com.petcareconnect.api.pet.PetRepository;
 import com.petcareconnect.api.security.JwtService;
 import com.petcareconnect.api.usuario.Usuario;
+import org.testcontainers.containers.PostgreSQLContainer;
 import com.petcareconnect.api.usuario.UsuarioRepository;
 
 @SpringBootTest
