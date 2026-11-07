@@ -2,6 +2,7 @@ package com.petcareconnect.api.config;
 
 import java.util.List;
 
+import com.petcareconnect.api.usuario.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +28,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, JwtService jwtService,
+                                           UsuarioRepository usuarioRepository,
                                            RestAuthenticationEntryPoint entryPoint,
                                            RestAccessDeniedHandler accessDeniedHandler) throws Exception {
         http
@@ -77,8 +79,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/**").authenticated()
                         // Front React (etapa 10) e /error
                         .anyRequest().permitAll())
-                .addFilterBefore(new JwtAuthFilter(jwtService), UsernamePasswordAuthenticationFilter.class);
-
+                .addFilterBefore(new JwtAuthFilter(jwtService, usuarioRepository),
+                        UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
